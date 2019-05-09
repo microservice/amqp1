@@ -1,0 +1,56 @@
+omg: 1
+lifecycle:
+  startup:
+    command: ["java", "-jar", "/app/target/amqp1-1.0-SNAPSHOT.jar"]
+actions:
+  subscribe_text:
+    events:
+      exchange:
+        http:
+          port: 8080
+          subscribe:
+            path: /subscribe/exchange/text
+            method: post
+            contentType: application/json
+        arguments:
+          name:
+            help: The name of the exchange to subscribe to
+            type: string
+            in: requestBody
+            required: true
+          output:
+            type: object
+            contentType: application/json
+            properties:
+              content_type:
+                type: string
+              properties:
+                type: map
+              text:
+                type: string
+  publish_text:
+    http:
+      path: /publish/text
+      method: post
+      port: 8080
+      contentType: application/json
+    arguments:
+      exchange:
+        type: string
+        in: requestBody
+        required: true
+      content_type:
+        type: string
+        in: requestBody
+      content:
+        type: string
+        in: requestBody
+        required: true
+      properties:
+        type: map
+        in: requestBody
+environment:
+  AMQP_URL:
+    help: "The AMQP 1.0 connection URL (eg: amqp://username:password@host:port)"
+    type: string
+    required: true
