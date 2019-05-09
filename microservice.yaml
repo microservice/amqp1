@@ -18,16 +18,16 @@ actions:
             type: string
             in: requestBody
             required: true
-          output:
-            type: object
-            contentType: application/json
+        output:
+          type: object
+          contentType: application/json
+          properties:
+            content_type:
+              type: string
             properties:
-              content_type:
-                type: string
-              properties:
-                type: map
-              text:
-                type: string
+              type: map
+            text:
+              type: string
   publish_text:
     http:
       path: /publish/text
