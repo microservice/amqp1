@@ -7,6 +7,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mongodb.BasicDBObject;
 import io.storyscript.omg.services.amqp1.entities.PublishTextPayload;
 import io.storyscript.omg.services.amqp1.entities.SubscribePayload;
+import org.apache.qpid.amqp_1_0.jms.impl.BytesMessageImpl;
 import org.apache.qpid.amqp_1_0.jms.impl.DestinationImpl;
 import org.apache.qpid.amqp_1_0.jms.impl.TextMessageImpl;
 import org.apache.qpid.amqp_1_0.type.Symbol;
@@ -21,6 +22,7 @@ import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
@@ -60,17 +62,19 @@ public class WebController {
 
         MessageProducer messageProducer = session.createProducer(destination);
 
-        TextMessageImpl message = (TextMessageImpl) session
-                .createTextMessage(payload.getContent());
-        message.setContentType(Symbol.getSymbol(payload.getContentType()));
+        final BytesMessageImpl bm = (BytesMessageImpl) session.createBytesMessage();
+
+        bm.writeBytes(payload.getContent().getBytes(StandardCharsets.UTF_8));
+        bm.setContentType(Symbol.getSymbol(payload.getContentType()));
 
         if (payload.getProperties() != null) {
             for (Map.Entry<String, Object> entry : payload.getProperties().entrySet()) {
-                message.getApplicationProperties().getValue().put(entry.getKey(), entry.getValue());
+                //noinspection unchecked
+                bm.getApplicationProperties().getValue().put(entry.getKey(), entry.getValue());
             }
         }
 
-        messageProducer.send(message);
+        messageProducer.send(bm);
         return "ok\n";
     }
 
