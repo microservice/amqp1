@@ -66,7 +66,7 @@ public class WebController {
 
         if (payload.getProperties() != null) {
             for (Map.Entry<String, Object> entry : payload.getProperties().entrySet()) {
-                message.setObjectProperty(entry.getKey(), entry.getValue());
+                message.getApplicationProperties().getValue().put(entry.getKey(), entry.getValue());
             }
         }
 
