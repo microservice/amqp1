@@ -14,4 +14,4 @@ ADD         src src
 RUN         ls  /app/
 RUN         ./mvnw package
 
-ENTRYPOINT  java -Xmx75m -jar /app/target/amqp1-1.0-SNAPSHOT.jar
+ENTRYPOINT  java -Xms50m -Xmx50m -jar /app/target/amqp1-1.0-SNAPSHOT.jar
