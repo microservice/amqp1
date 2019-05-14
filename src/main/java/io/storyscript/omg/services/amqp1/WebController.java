@@ -94,6 +94,11 @@ public class WebController {
 
         MessageConsumer messageConsumer = session.createConsumer(destination);
         messageConsumer.setMessageListener(rawMessage -> {
+            if (!(rawMessage instanceof TextMessageImpl)) {
+                logger.error("Dropped incoming message - not an instance of TextMessageImpl, type={}",
+                        rawMessage.getClass());
+                return;
+            }
             final TextMessageImpl message = (TextMessageImpl) rawMessage;
             final BasicDBObject data;
             try {
