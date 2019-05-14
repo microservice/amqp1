@@ -1,5 +1,7 @@
 FROM        openjdk:12.0.1-jdk-oracle
 
+RUN         yum -y install procps-ng
+
 RUN         mkdir /app
 WORKDIR     /app
 ADD         .mvn .mvn
