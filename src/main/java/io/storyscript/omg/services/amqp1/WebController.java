@@ -64,8 +64,12 @@ public class WebController {
 
         final BytesMessageImpl bm = (BytesMessageImpl) session.createBytesMessage();
 
-        bm.writeBytes(payload.getContent().getBytes(StandardCharsets.UTF_8));
-        bm.setContentType(Symbol.getSymbol(payload.getContentType()));
+        if (payload.getContent() != null) {
+            bm.writeBytes(payload.getContent().getBytes(StandardCharsets.UTF_8));
+            if (payload.getContentType() != null) {
+                bm.setContentType(Symbol.getSymbol(payload.getContentType()));
+            }
+        }
 
         if (payload.getProperties() != null) {
             for (Map.Entry<String, Object> entry : payload.getProperties().entrySet()) {
