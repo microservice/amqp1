@@ -79,6 +79,7 @@ public class WebController {
         }
 
         messageProducer.send(bm);
+        session.close();
         return "ok\n";
     }
 
