@@ -3,7 +3,7 @@ lifecycle:
   startup:
     command: ["java", "-Xss256k", "-Xms50m", "-Xmx50m", "-jar", "/app/target/amqp1-1.0-SNAPSHOT.jar"]
 actions:
-  subscribe_text:
+  subscribeText:
     events:
       exchange:
         http:
@@ -28,7 +28,7 @@ actions:
               type: map
             text:
               type: string
-  publish_text:
+  publishText:
     http:
       path: /publish/text
       method: post
