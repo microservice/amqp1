@@ -2,8 +2,12 @@ omg: 1
 lifecycle:
   startup:
     command: ["java", "-Xss256k", "-Xms50m", "-Xmx50m", "-jar", "/app/target/amqp1-1.0-SNAPSHOT.jar"]
+info:
+  version: 1.0.0
+  title: Amqp1
+  description: This is a amqp1 service
 actions:
-  subscribe_text:
+  subscribeText:
     events:
       exchange:
         http:
@@ -28,7 +32,7 @@ actions:
               type: map
             text:
               type: string
-  publish_text:
+  publishText:
     http:
       path: /publish/text
       method: post
