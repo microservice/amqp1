@@ -53,6 +53,8 @@ actions:
       properties:
         type: map
         in: requestBody
+    output:
+      type: none
 environment:
   AMQP_URL:
     help: "The AMQP 1.0 connection URL (eg: amqp://username:password@host:port)"
