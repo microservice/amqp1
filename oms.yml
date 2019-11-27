@@ -1,11 +1,21 @@
-omg: 1
-lifecycle:
-  startup:
-    command: ["java", "-Xss256k", "-Xms50m", "-Xmx50m", "-jar", "/app/target/amqp1-1.0-SNAPSHOT.jar"]
+oms: 1
 info:
   version: 1.0.0
   title: Amqp1
   description: This is a amqp1 service
+  contact:
+    name: Open Microservices
+    url: 'https://openmicroservices.org'
+    email: core@openmicroservices.org
+lifecycle:
+  startup:
+    command:
+      - java
+      - '-Xss256k'
+      - '-Xms50m'
+      - '-Xmx50m'
+      - '-jar'
+      - /app/target/amqp1-1.0-SNAPSHOT.jar
 actions:
   subscribeText:
     events:
@@ -57,6 +67,6 @@ actions:
       type: none
 environment:
   AMQP_URL:
-    help: "The AMQP 1.0 connection URL (eg: amqp://username:password@host:port)"
+    help: 'The AMQP 1.0 connection URL (eg: amqp://username:password@host:port)'
     type: string
     required: true
