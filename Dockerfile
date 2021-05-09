@@ -1,4 +1,4 @@
-FROM openjdk:12.0.2-jdk-oracle
+FROM openjdk:16.0.1-jdk-oracle
 
 RUN         yum -y install procps-ng
 
