@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.apache.qpid</groupId>
             <artifactId>qpid-jms-client</artifactId>
-            <version>0.47.0</version>
+            <version>0.59.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.qpid/qpid-amqp-1-0-client-jms -->
